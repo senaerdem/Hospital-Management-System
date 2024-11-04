@@ -9,4 +9,7 @@ import com.java.loginReg.entities.UserDto;
 public interface UserService {
 
 	User save(UserDto userDto);
+	
+	 boolean authenticate(String email, String password);
+	
 }

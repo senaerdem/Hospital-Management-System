@@ -1,9 +1,11 @@
 package com.java.loginReg.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -13,12 +15,22 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@SequenceGenerator(name = "hibernate_sequence", sequenceName = "hibernate_sequence", allocationSize = 1)
 	private Long id;
 	
+	@Column(name = "email", nullable = false)
 	private String email;
+	
+	@Column(name = "password", nullable = false)
 	private String password;
+	
+	@Column(name = "role", nullable = false)
 	private String role;
+	
+	@Column(name = "first_name", nullable = false)
 	private String firstName;
+	
+	@Column(name = "last_name", nullable = false)
 	private String lastName;
 	
 	public User() {

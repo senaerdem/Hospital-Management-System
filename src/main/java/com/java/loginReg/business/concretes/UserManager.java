@@ -20,4 +20,10 @@ public class UserManager implements UserService {
 		return userDao.save(user);
 	}
 
+	@Override
+	public boolean authenticate(String email, String password) {
+		User user = userDao.findByEmail(email);
+        return user != null && user.getPassword().equals(password);
+	}
+
 }
