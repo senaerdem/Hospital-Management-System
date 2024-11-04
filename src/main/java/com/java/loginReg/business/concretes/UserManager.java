@@ -1,5 +1,7 @@
 package com.java.loginReg.business.concretes;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,11 @@ public class UserManager implements UserService {
 	public boolean authenticate(String email, String password) {
 		User user = userDao.findByEmail(email);
         return user != null && user.getPassword().equals(password);
+	}
+
+	@Override
+	public List<User> getAllUsers() {
+		return userDao.findAll(); // Kullanıcıları döndür
 	}
 
 }

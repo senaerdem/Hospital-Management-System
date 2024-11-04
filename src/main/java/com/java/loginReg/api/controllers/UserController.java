@@ -1,5 +1,7 @@
 package com.java.loginReg.api.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.java.loginReg.business.abstracts.UserService;
+import com.java.loginReg.entities.User;
 import com.java.loginReg.entities.UserDto;
 
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,5 +52,9 @@ public class UserController {
 	    }
 	}
 
-	
+	@GetMapping("/all")
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = userService.getAllUsers();
+        return ResponseEntity.ok(users);
+    }
 }
