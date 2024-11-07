@@ -30,7 +30,7 @@ public class UserManager implements UserService {
 
 	@Override
 	public List<User> getAllUsers() {
-		return userDao.findAll(); // Kullanıcıları döndür
+		return userDao.findAll();
 	}
 
 }

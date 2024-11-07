@@ -14,8 +14,8 @@ import javax.persistence.Table;
 public class Doctor {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 	
 	@OneToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -42,11 +42,11 @@ public class Doctor {
 		super();
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

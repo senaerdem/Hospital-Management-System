@@ -35,14 +35,13 @@ public class UserController {
 	
 	@PostMapping("/registration")
 	public String saveUser(@RequestBody UserDto userDto) {
-	    System.out.println(userDto); // Hata ayıklama için loglama
+	    System.out.println(userDto);
 	    userService.save(userDto);
-	    return "Kayıt Başarılı"; // Sadece bir başarı mesajı döndür
+	    return "Kayıt Başarılı";
 	}
 
 	@PostMapping("/login")
 	public ResponseEntity<?> loginUser(@RequestBody UserDto userDto) {
-	    // Kullanıcıyı doğrulamak için bir servis çağır
 	    boolean isAuthenticated = userService.authenticate(userDto.getEmail(), userDto.getPassword());
 	    
 	    if (isAuthenticated) {
