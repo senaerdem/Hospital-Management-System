@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class Doctor {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@OneToOne

@@ -5,6 +5,8 @@ import java.time.LocalTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,11 +20,11 @@ public class Appointment {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	
 	@ManyToOne
 	@JoinColumn(name = "patient_id", referencedColumnName = "id")
-	private User patient;
+	private Patient patient;
 	
 	@ManyToOne
 	@JoinColumn(name = "doctor_id", referencedColumnName = "id")
@@ -35,10 +37,11 @@ public class Appointment {
 	private LocalTime appointmentTime;
 	
 	@Column(name = "status")
-	private String status;
+	@Enumerated(EnumType.STRING)
+	private Status status;
 
-	public Appointment(User patient, Doctor doctor, LocalDate appointmentDate, LocalTime appointmentTime,
-			String status) {
+	public Appointment(Patient patient, Doctor doctor, LocalDate appointmentDate, LocalTime appointmentTime,
+			Status status) {
 		super();
 		this.patient = patient;
 		this.doctor = doctor;
@@ -51,19 +54,19 @@ public class Appointment {
 		super();
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public User getPatient() {
+	public Patient getPatient() {
 		return patient;
 	}
 
-	public void setPatient(User patient) {
+	public void setPatient(Patient patient) {
 		this.patient = patient;
 	}
 
@@ -91,11 +94,11 @@ public class Appointment {
 		this.appointmentTime = appointmentTime;
 	}
 
-	public String getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 }
