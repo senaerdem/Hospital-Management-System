@@ -2,9 +2,12 @@ package com.java.loginReg.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -23,19 +26,21 @@ public class User {
 	private String password;
 	
 	@Column(name = "role", nullable = false)
-	private String role;
+	@Enumerated(EnumType.STRING)
+	private Role role;
 	
 	@Column(name = "first_name", nullable = false)
 	private String firstName;
 	
 	@Column(name = "last_name", nullable = false)
 	private String lastName;
+
 	
 	public User() {
 		super();
 	}
 
-	public User(String email, String password, String role, String firstName, String lastName) {
+	public User(String email, String password, Role role, String firstName, String lastName) {
 		super();
 		this.email = email;
 		this.password = password;
@@ -68,11 +73,11 @@ public class User {
 		this.password = password;
 	}
 
-	public String getRole() {
+	public Role getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 

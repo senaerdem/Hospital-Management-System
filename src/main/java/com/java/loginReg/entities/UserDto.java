@@ -4,11 +4,11 @@ public class UserDto {
 	
 	private String email;
 	private String password;
-	private String role;
+	private Role role;
 	private String firstName;
 	private String lastName;
 	
-	public UserDto(String email, String password, String role, String firstName, String lastName) {
+	public UserDto(String email, String password, Role role, String firstName, String lastName) {
 		super();
 		this.email = email;
 		this.password = password;
@@ -33,11 +33,11 @@ public class UserDto {
 		this.password = password;
 	}
 
-	public String getRole() {
+	public Role getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 
