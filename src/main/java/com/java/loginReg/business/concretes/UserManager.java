@@ -19,7 +19,7 @@ public class UserManager implements UserService {
 	
 	@Override
 	public User save(UserDto userDto) {
-		User user = new User(userDto.getEmail(), userDto.getPassword(), userDto.getRole(), userDto.getFirstName(), userDto.getLastName());
+		User user = new User(userDto.getEmail(), userDto.getPassword(), userDto.getRole(), userDto.getGender(), userDto.getFirstName(), userDto.getLastName());
 		return userDao.save(user);
 	}
 
@@ -52,6 +52,7 @@ public class UserManager implements UserService {
             existingUser.setEmail(user.getEmail());
             existingUser.setPassword(user.getPassword());
             existingUser.setRole(user.getRole());
+            existingUser.setGender(user.getGender());
             userDao.save(existingUser);
             return true;
         }

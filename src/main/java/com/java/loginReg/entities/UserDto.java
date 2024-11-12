@@ -5,14 +5,16 @@ public class UserDto {
 	private String email;
 	private String password;
 	private Role role;
+	private Gender gender;
 	private String firstName;
 	private String lastName;
 	
-	public UserDto(String email, String password, Role role, String firstName, String lastName) {
+	public UserDto(String email, String password, Role role, Gender gender, String firstName, String lastName) {
 		super();
 		this.email = email;
 		this.password = password;
 		this.role = role;
+		this.gender = gender;
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
@@ -39,6 +41,14 @@ public class UserDto {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}
+	
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
 	}
 
 	public String getFirstName() {

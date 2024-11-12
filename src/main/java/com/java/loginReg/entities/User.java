@@ -7,7 +7,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -29,6 +28,10 @@ public class User {
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	
+	@Column(name = "gender", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private Gender gender;
+	
 	@Column(name = "first_name", nullable = false)
 	private String firstName;
 	
@@ -40,11 +43,12 @@ public class User {
 		super();
 	}
 
-	public User(String email, String password, Role role, String firstName, String lastName) {
+	public User(String email, String password, Role role, Gender gender, String firstName, String lastName) {
 		super();
 		this.email = email;
 		this.password = password;
 		this.role = role;
+		this.gender = gender;
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
@@ -81,6 +85,15 @@ public class User {
 		this.role = role;
 	}
 
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+
+	
 	public String getFirstName() {
 		return firstName;
 	}
