@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.java.loginReg.entities.Doctor;
 import com.java.loginReg.entities.Role;
 import com.java.loginReg.entities.User;
 import com.java.loginReg.entities.UserDto;

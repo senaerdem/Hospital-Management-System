@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.java.loginReg.business.abstracts.UserService;
+import com.java.loginReg.entities.Doctor;
 import com.java.loginReg.entities.Role;
 import com.java.loginReg.entities.User;
 import com.java.loginReg.entities.UserDto;
@@ -93,4 +94,5 @@ public class UserController {
 			return ResponseEntity.status(400).body("User not found!");
 		}
 	}
+
 }

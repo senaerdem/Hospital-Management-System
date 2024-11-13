@@ -8,26 +8,31 @@ import org.springframework.stereotype.Service;
 import com.java.loginReg.business.abstracts.DoctorService;
 import com.java.loginReg.dataAccess.DoctorDao;
 import com.java.loginReg.entities.Doctor;
+import com.java.loginReg.entities.User;
 
 @Service
 public class DoctorManager implements DoctorService{
 	
 	@Autowired
-	private DoctorDao doctorDao;
-
-	@Override
-	public Doctor save(Doctor doctor) {
-		return doctorDao.save(doctor);
-	}
-
+    private DoctorDao doctorDao;
+	
 	@Override
 	public List<Doctor> getAllDoctors() {
 		return doctorDao.findAll();
 	}
 
 	@Override
-	public Doctor findDoctorById(Long id) {
-		return doctorDao.findById(id).orElse(null);
+	public boolean updateDoctor(Long id, Doctor doctor) {
+		if (doctorDao.existsById(id)) {
+	        Doctor existingDoctor = doctorDao.findById(id).orElseThrow();
+	        existingDoctor.setHospital(doctor.getHospital());
+	        existingDoctor.setSpecialization(doctor.getSpecialization());
+	        existingDoctor.setWorkingDays(doctor.getWorkingDays());
+	        existingDoctor.setWorkingHours(doctor.getWorkingHours());
+	        doctorDao.save(existingDoctor);
+	        return true;
+	    }
+		return false;
 	}
-
+	
 }

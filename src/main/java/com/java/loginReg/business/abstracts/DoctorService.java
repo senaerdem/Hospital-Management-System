@@ -6,7 +6,8 @@ import com.java.loginReg.entities.Doctor;
 
 public interface DoctorService {
 
-	Doctor save(Doctor doctor);
 	List<Doctor> getAllDoctors();
-	Doctor findDoctorById(Long id);
+	
+	boolean updateDoctor(Long id, Doctor doctor);
+
 }
