@@ -20,6 +20,12 @@ public class DoctorManager implements DoctorService{
 	public List<Doctor> getAllDoctors() {
 		return doctorDao.findAll();
 	}
+	
+	@Override
+	public Doctor save(Doctor doctor) {
+		return doctorDao.save(doctor);
+	}
+
 
 	@Override
 	public boolean updateDoctor(Long id, Doctor doctor) {
