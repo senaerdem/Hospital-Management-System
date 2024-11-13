@@ -46,5 +46,24 @@ public class DoctorController {
 			return ResponseEntity.status(400).body("User not found!");
 		}
 	}
+	
+	@GetMapping("/doctors/{id}")
+	public ResponseEntity<Object> getDoctorById(@PathVariable Long id, @RequestParam Role role) {
+	    if (role != Role.DOCTOR) {
+	        return ResponseEntity
+	                .status(HttpStatus.FORBIDDEN)  // 403 Forbidden
+	                .body("You do not have permission to view this resource.");
+	    }
+	    
+	    Doctor doctor = doctorService.getDoctorById(id);
+	    if (doctor == null) {
+	        return ResponseEntity
+	                .status(HttpStatus.NOT_FOUND)  // 404 Not Found
+	                .body("Doctor not found.");
+	    }
+
+	    return ResponseEntity.ok(doctor);  // 200 OK ve doktor bilgisi
+	}
+
 
 }

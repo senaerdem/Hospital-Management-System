@@ -35,4 +35,9 @@ public class DoctorManager implements DoctorService{
 		return false;
 	}
 	
+	// Doktorun ID'sine göre doktoru bulma
+    public Doctor getDoctorById(Long id) {
+        return doctorDao.findById(id).orElseThrow(() -> new RuntimeException("Doctor not found"));
+    }
+	
 }
