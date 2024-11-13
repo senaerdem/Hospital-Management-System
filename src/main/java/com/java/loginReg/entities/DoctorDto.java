@@ -6,7 +6,7 @@ public class DoctorDto {
     private String lastName;
     private String email;
     private String password;
-    private String role;  // Role (doctor)
+    private Role role;  // Role (doctor)
     
     // Diğer doktor bilgileri (isteğe bağlı)
     private String workingDays;
@@ -14,9 +14,8 @@ public class DoctorDto {
     private String hospital;
     private String specialty;
     
-	public DoctorDto(String firstName, String lastName, String email, String password, String role, String workingDays,
+	public DoctorDto(String firstName, String lastName, String email, String password, Role role, String workingDays,
 			String workingHours, String hospital, String specialty) {
-		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -51,10 +50,10 @@ public class DoctorDto {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getRole() {
+	public Role getRole() {
 		return role;
 	}
-	public void setRole(String role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 	public String getWorkingDays() {
@@ -81,4 +80,19 @@ public class DoctorDto {
 	public void setSpecialty(String specialty) {
 		this.specialty = specialty;
 	}
+	
+	@Override
+	public String toString() {
+	    return "DoctorDto{" +
+	           "firstName='" + firstName + '\'' +
+	           ", lastName='" + lastName + '\'' +
+	           ", email='" + email + '\'' +
+	           ", role='" + role + '\'' +
+	           ", workingDays='" + workingDays + '\'' +
+	           ", workingHours='" + workingHours + '\'' +
+	           ", hospital='" + hospital + '\'' +
+	           ", specialty='" + specialty + '\'' +
+	           '}';
+	}
+
 }

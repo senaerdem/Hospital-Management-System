@@ -16,8 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.java.loginReg.business.abstracts.DoctorService;
+import com.java.loginReg.dataAccess.DoctorDao;
+import com.java.loginReg.dataAccess.UserDao;
 import com.java.loginReg.entities.Doctor;
+import com.java.loginReg.entities.DoctorDto;
 import com.java.loginReg.entities.Role;
+import com.java.loginReg.entities.User;
 
 @RestController
 @RequestMapping("/doctors")
@@ -25,6 +29,12 @@ import com.java.loginReg.entities.Role;
 public class DoctorController {
 	@Autowired
     private DoctorService doctorService;
+	
+	@Autowired
+    private DoctorDao doctorDao;
+
+    @Autowired
+    private UserDao userDao;
 	
 	@GetMapping("/all")
     public ResponseEntity<List<Doctor>> getAllDoctors(@RequestParam Role role) {
@@ -68,6 +78,66 @@ public class DoctorController {
         }
 
         return ResponseEntity.ok(doctor);  // 200 OK ve doktor bilgisi
+    }
+	
+	
+	
+	
+	
+	
+	
+	
+	// Doktor bilgilerini almak için
+    @GetMapping("/{id}")
+    public DoctorDto getDoctorById(@PathVariable Long id) {
+        Doctor doctor = doctorDao.findById(id).orElseThrow(() -> new RuntimeException("Doctor not found"));
+        User user = doctor.getUser(); // Doktorun kullanıcı bilgilerini alıyoruz
+        return new DoctorDto(
+            user.getFirstName(),
+            user.getLastName(),
+            user.getEmail(),
+            user.getPassword(),
+            user.getRole(),
+            doctor.getWorkingDays(),
+            doctor.getWorkingHours(),
+            doctor.getHospital(),
+            doctor.getSpecialization()
+        );
+    }
+    
+    // Doktor bilgisini güncelleme
+    @PutMapping("/{id}")
+    public DoctorDto updateDoctor(@PathVariable Long id, @RequestBody DoctorDto doctorDto) {
+        Doctor doctor = doctorDao.findById(id).orElseThrow(() -> new RuntimeException("Doctor not found"));
+        User user = doctor.getUser();
+        
+        // Kullanıcı bilgilerini güncelle
+        user.setFirstName(doctorDto.getFirstName());
+        user.setLastName(doctorDto.getLastName());
+        user.setEmail(doctorDto.getEmail());
+        user.setPassword(doctorDto.getPassword());
+        
+        // Doktor bilgilerini güncelle
+        doctor.setWorkingDays(doctorDto.getWorkingDays());
+        doctor.setWorkingHours(doctorDto.getWorkingHours());
+        doctor.setHospital(doctorDto.getHospital());
+        doctor.setSpecialization(doctorDto.getSpecialty());
+        
+        // Veritabanına kaydet
+        userDao.save(user);
+        doctorDao.save(doctor);
+
+        return new DoctorDto(
+            user.getFirstName(),
+            user.getLastName(),
+            user.getEmail(),
+            user.getPassword(),
+            user.getRole(),
+            doctor.getWorkingDays(),
+            doctor.getWorkingHours(),
+            doctor.getHospital(),
+            doctor.getSpecialization()
+        );
     }
 
 
