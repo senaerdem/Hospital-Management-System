@@ -10,7 +10,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "doctors")
 public class Doctor {
 
 	@Id
@@ -24,16 +23,20 @@ public class Doctor {
 	@Column(name = "specialization")
 	private String specialization;
 	
+	@Column(name = "hospital")
+	private String hospital;
+	
 	@Column(name = "working_days")
 	private String workingDays;
 	
 	@Column(name = "working_hours")
 	private String workingHours;
 	
-	public Doctor(User user, String specialization, String workingDays, String workingHours) {
+	public Doctor(User user, String specialization, String hospital, String workingDays, String workingHours) {
 		super();
 		this.user = user;
 		this.specialization = specialization;
+		this.hospital = hospital;
 		this.workingDays = workingDays;
 		this.workingHours = workingHours;
 	}
@@ -44,10 +47,6 @@ public class Doctor {
 
 	public Long getId() {
 		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public User getUser() {
@@ -64,6 +63,14 @@ public class Doctor {
 
 	public void setSpecialization(String specialization) {
 		this.specialization = specialization;
+	}
+
+	public String getHospital() {
+		return hospital;
+	}
+
+	public void setHospital(String hospital) {
+		this.hospital = hospital;
 	}
 
 	public String getWorkingDays() {

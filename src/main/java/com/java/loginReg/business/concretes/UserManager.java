@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.java.loginReg.business.abstracts.UserService;
+import com.java.loginReg.dataAccess.DoctorDao;
 import com.java.loginReg.dataAccess.UserDao;
+import com.java.loginReg.entities.Doctor;
 import com.java.loginReg.entities.Role;
 import com.java.loginReg.entities.User;
 import com.java.loginReg.entities.UserDto;
@@ -16,6 +18,9 @@ public class UserManager implements UserService {
 
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+    private DoctorDao doctorDao;
 	
 	@Override
 	public User save(UserDto userDto) {
