@@ -1,14 +1,20 @@
 package com.java.loginReg.business.concretes;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.HashMap;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.java.loginReg.business.abstracts.UserService;
 import com.java.loginReg.dataAccess.DoctorDao;
+import com.java.loginReg.dataAccess.PatientDao;
 import com.java.loginReg.dataAccess.UserDao;
 import com.java.loginReg.entities.Doctor;
+import com.java.loginReg.entities.Patient;
 import com.java.loginReg.entities.Role;
 import com.java.loginReg.entities.User;
 import com.java.loginReg.entities.UserDto;
@@ -21,6 +27,9 @@ public class UserManager implements UserService {
 	
 	@Autowired
     private DoctorDao doctorDao;
+	
+	@Autowired
+	private PatientDao patientDao;
 	
 	@Override
 	public User save(UserDto userDto) {
@@ -69,6 +78,32 @@ public class UserManager implements UserService {
 	    return userDao.findByEmail(email);
 	}
 	
+
+	public Map<String, Object> getUserIdByCredentials(String email, String password, Role role) {
+	    Optional<User> user = userDao.findByEmailAndPasswordAndRole(email, password, role);
+	    
+	    if (user.isPresent()) {
+	        Map<String, Object> response = new HashMap<>();
+	        response.put("userId", user.get().getId());  // Kullanıcı ID'sini döndür
+
+	        response.put("firstName", user.get().getFirstName());
+	        response.put("lastName", user.get().getLastName());
+
+	        if (role == Role.PATIENT) {
+	            // Hasta ise, Patient ID'yi ekle
+	            Optional<Patient> patient = patientDao.findByUser(user.get());
+	            patient.ifPresent(p -> response.put("patientId", p.getId()));
+	        } else if (role == Role.DOCTOR) {
+	            // Doktor ise, Doctor ID'yi ekle
+	            Optional<Doctor> doctor = doctorDao.findByUser(user.get());
+	            doctor.ifPresent(d -> response.put("doctorId", d.getId()));
+	        }
+
+	        return response;
+	    }
+
+	    return null;  // Kullanıcı bulunamazsa null döner
+	}
 
 
 }

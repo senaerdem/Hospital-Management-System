@@ -1,6 +1,8 @@
 package com.java.loginReg.api.controllers;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -96,5 +98,22 @@ public class UserController {
 	}
 	
 	
+	
+	
+	// Kullanıcı girişi yapıldığında, rolüne göre ID ve isim soyisim bilgilerini döndürür
+    @GetMapping("/getUserId")
+    public ResponseEntity<Map<String, Object>> getUserId(
+            @RequestParam String email,
+            @RequestParam String password,
+            @RequestParam Role role) {
+
+        Map<String, Object> response = userService.getUserIdByCredentials(email, password, role);
+
+        if (response != null) {
+            return ResponseEntity.ok(response); // Başarılı yanıt
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Collections.singletonMap("message", "Kullanıcı bulunamadı"));
+        }
+    }
 	
 }
