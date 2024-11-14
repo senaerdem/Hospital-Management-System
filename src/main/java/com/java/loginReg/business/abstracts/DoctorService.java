@@ -2,8 +2,6 @@ package com.java.loginReg.business.abstracts;
 
 import java.util.List;
 
-import org.springframework.web.bind.annotation.RequestParam;
-
 import com.java.loginReg.entities.Doctor;
 
 public interface DoctorService {
