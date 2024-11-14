@@ -45,5 +45,10 @@ public class DoctorManager implements DoctorService{
     public Doctor getDoctorById(Long id) {
         return doctorDao.findById(id).orElseThrow(() -> new RuntimeException("Doctor not found"));
     }
+
+ // Uzmanlık alanına göre doktorları getir
+    public List<Doctor> findBySpecialization(String specialization) {
+        return doctorDao.findBySpecialization(specialization); // Repository üzerinden veriyi çekiyoruz
+    }
 	
 }

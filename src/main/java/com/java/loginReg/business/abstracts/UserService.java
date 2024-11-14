@@ -22,4 +22,7 @@ public interface UserService {
 	
 	boolean updateUser(Long id, User user);
 	
+	User getUserByEmail(String email);
+
+	
 }

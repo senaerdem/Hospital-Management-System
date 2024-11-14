@@ -63,5 +63,12 @@ public class UserManager implements UserService {
         }
 		return false;
 	}
+	
+	@Override
+	public User getUserByEmail(String email) {
+	    return userDao.findByEmail(email);
+	}
+	
+
 
 }
