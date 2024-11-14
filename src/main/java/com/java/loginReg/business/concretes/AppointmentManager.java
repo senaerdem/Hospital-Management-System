@@ -24,6 +24,7 @@ public class AppointmentManager implements AppointmentService {
     @Autowired
     private PatientDao patientDao;
     
+    @Override
     public Appointment createAppointment(Long doctorId, Long patientId, String day, String time) {
         // İlgili doktor ve hasta verilerini al
         Doctor doctor = doctorDao.findById(doctorId).orElseThrow(() -> new RuntimeException("Doctor not found"));
