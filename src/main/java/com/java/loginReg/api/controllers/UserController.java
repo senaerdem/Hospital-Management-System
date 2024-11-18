@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.java.loginReg.business.abstracts.AppointmentService;
 import com.java.loginReg.business.abstracts.UserService;
+import com.java.loginReg.entities.Appointment;
 import com.java.loginReg.entities.Doctor;
 import com.java.loginReg.entities.Role;
 import com.java.loginReg.entities.User;
@@ -35,6 +37,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService; 
+	
+	@Autowired 
+	private AppointmentService appointmentService;
 	
 	@GetMapping("/registration")
 	public String getRegistrationPage(@ModelAttribute("user") UserDto userDto) {
@@ -94,6 +99,25 @@ public class UserController {
 			return ResponseEntity.ok("User updated successfully!");
 		} else {
 			return ResponseEntity.status(400).body("User not found!");
+		}
+	}
+	
+	@GetMapping("/appointments")
+    public ResponseEntity<List<Appointment>> getAllAppointments(@RequestParam Role role) {
+		if (role != Role.ADMIN) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
+		}
+        List<Appointment> appointments = appointmentService.getAllAppointments();
+        return ResponseEntity.ok(appointments);
+    }
+	
+	@DeleteMapping("/appointments/delete/{id}")
+	public ResponseEntity<String> deleteAppointment(@PathVariable Long id) {
+		boolean isDeleted = appointmentService.deleteAppointment(id);
+		if(isDeleted) {
+			return ResponseEntity.ok("Appointment deleted successfully!");
+		} else {
+			return ResponseEntity.status(400).body("Appointment not found!");
 		}
 	}
 	

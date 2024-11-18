@@ -15,4 +15,5 @@ public interface DoctorDao extends JpaRepository<Doctor, Long> {
 	List<Doctor> findBySpecialization(String specialization);
 	
 	Optional<Doctor> findByUser(User user);
+	
 }

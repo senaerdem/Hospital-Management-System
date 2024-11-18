@@ -10,9 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.java.loginReg.business.abstracts.UserService;
+import com.java.loginReg.dataAccess.AppointmentDao;
 import com.java.loginReg.dataAccess.DoctorDao;
 import com.java.loginReg.dataAccess.PatientDao;
 import com.java.loginReg.dataAccess.UserDao;
+import com.java.loginReg.entities.Appointment;
 import com.java.loginReg.entities.Doctor;
 import com.java.loginReg.entities.Patient;
 import com.java.loginReg.entities.Role;
@@ -30,6 +32,9 @@ public class UserManager implements UserService {
 	
 	@Autowired
 	private PatientDao patientDao;
+	
+	@Autowired
+	private AppointmentDao appointmentDao;
 	
 	@Override
 	public User save(UserDto userDto) {
@@ -104,6 +109,7 @@ public class UserManager implements UserService {
 
 	    return null;  // Kullanıcı bulunamazsa null döner
 	}
-
+	
+	
 
 }

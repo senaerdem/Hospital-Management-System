@@ -15,5 +15,6 @@ public interface DoctorService {
 	Doctor getDoctorById(Long id);
 	
 	List<Doctor> findBySpecialization(String specialization);
+	
 
 }

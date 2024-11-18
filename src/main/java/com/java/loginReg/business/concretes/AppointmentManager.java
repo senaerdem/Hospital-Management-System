@@ -1,5 +1,7 @@
 package com.java.loginReg.business.concretes;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,5 +43,20 @@ public class AppointmentManager implements AppointmentService {
         // Randevuyu veritabanına kaydet
         return appointmentDao.save(appointment);
     }
+    
+    @Override
+	public List<Appointment> getAllAppointments() {
+		return appointmentDao.findAll();
+	}
+
+    @Override
+	public boolean deleteAppointment(Long id) {
+		if (appointmentDao.existsById(id)) {
+			appointmentDao.deleteById(id);
+			return true;
+		}
+		return false;
+	}
+
 
 }
