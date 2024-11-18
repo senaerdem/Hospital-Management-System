@@ -9,4 +9,6 @@ import com.java.loginReg.entities.Appointment;
 public interface AppointmentDao extends JpaRepository<Appointment, Long> {
 
 	 List<Appointment> findByDoctorId(Long doctorId);
+	 
+	 List<Appointment> findByPatientId(Long patientId);
 }

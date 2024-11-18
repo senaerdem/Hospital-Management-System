@@ -70,5 +70,11 @@ public class AppointmentController {
 
         return ResponseEntity.ok(updatedAppointment);
     }
+    
+    @GetMapping("/patient/{patientId}")
+    public ResponseEntity<List<Appointment>> getAppointmentsByPatientId(@PathVariable Long patientId) {
+        List<Appointment> appointments = appointmentService.getAppointmentsByPatientId(patientId);
+        return ResponseEntity.ok(appointments);
+    }
 
 }

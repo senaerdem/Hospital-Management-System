@@ -73,4 +73,8 @@ public class AppointmentManager implements AppointmentService {
 
         return null;
     }
+    
+    public List<Appointment> getAppointmentsByPatientId(Long patientId) {
+        return appointmentDao.findByPatientId(patientId);
+    }
 }
