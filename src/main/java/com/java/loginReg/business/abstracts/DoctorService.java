@@ -10,8 +10,6 @@ public interface DoctorService {
 	
 	Doctor save(Doctor doctor);
 	
-	boolean updateDoctor(Long id, Doctor doctor);
-	
 	Doctor getDoctorById(Long id);
 	
 	List<Doctor> findBySpecialization(String specialization);

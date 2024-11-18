@@ -121,9 +121,6 @@ public class UserController {
 		}
 	}
 	
-	
-	
-	
 	// Kullanıcı girişi yapıldığında, rolüne göre ID ve isim soyisim bilgilerini döndürür
     @GetMapping("/getUserId")
     public ResponseEntity<Map<String, Object>> getUserId(
