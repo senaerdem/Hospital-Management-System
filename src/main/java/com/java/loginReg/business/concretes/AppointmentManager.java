@@ -44,6 +44,7 @@ public class AppointmentManager implements AppointmentService {
         return appointmentDao.save(appointment);
     }
     
+    // Tüm randevularu listleyen method
     @Override
 	public List<Appointment> getAllAppointments() {
 		return appointmentDao.findAll();
@@ -58,11 +59,14 @@ public class AppointmentManager implements AppointmentService {
 		return false;
 	}
     
+    // Doktor id'sine göre randevuları listeleyen method
+    @Override
     public List<Appointment> getAppointmentsByDoctorId(Long doctorId) {
         return appointmentDao.findByDoctorId(doctorId);
     }
     
-    // Randevu durumunu güncelleyen metod
+    // Randevu durumunu güncelleyen method
+    @Override
     public Appointment updateAppointmentStatus(Long appointmentId, Status status) {
         Appointment appointment = appointmentDao.findById(appointmentId).orElse(null);
 
@@ -74,6 +78,8 @@ public class AppointmentManager implements AppointmentService {
         return null;
     }
     
+    // Hasta id'sine göre randevuları listeleyen method
+    @Override
     public List<Appointment> getAppointmentsByPatientId(Long patientId) {
         return appointmentDao.findByPatientId(patientId);
     }
