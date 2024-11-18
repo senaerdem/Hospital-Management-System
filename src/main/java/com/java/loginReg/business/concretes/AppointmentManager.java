@@ -57,6 +57,20 @@ public class AppointmentManager implements AppointmentService {
 		}
 		return false;
 	}
+    
+    public List<Appointment> getAppointmentsByDoctorId(Long doctorId) {
+        return appointmentDao.findByDoctorId(doctorId);
+    }
+    
+    // Randevu durumunu güncelleyen metod
+    public Appointment updateAppointmentStatus(Long appointmentId, Status status) {
+        Appointment appointment = appointmentDao.findById(appointmentId).orElse(null);
 
+        if (appointment != null) {
+            appointment.setStatus(status); // Durumu güncelliyoruz
+            return appointmentDao.save(appointment); // Güncellenmiş randevuyu kaydediyoruz
+        }
 
+        return null;
+    }
 }

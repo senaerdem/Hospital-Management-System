@@ -3,6 +3,7 @@ package com.java.loginReg.business.abstracts;
 import java.util.List;
 
 import com.java.loginReg.entities.Appointment;
+import com.java.loginReg.entities.Status;
 
 public interface AppointmentService {
 	
@@ -11,5 +12,9 @@ public interface AppointmentService {
 	List<Appointment> getAllAppointments();
 	
 	boolean deleteAppointment(Long id);
+	
+	List<Appointment> getAppointmentsByDoctorId(Long doctorId);
+	
+	Appointment updateAppointmentStatus(Long appointmentId, Status status);
 
 }
