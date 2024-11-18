@@ -39,7 +39,20 @@ public class UserManager implements UserService {
 	@Override
 	public User save(UserDto userDto) {
 		User user = new User(userDto.getEmail(), userDto.getPassword(), userDto.getRole(), userDto.getGender(), userDto.getFirstName(), userDto.getLastName());
-		return userDao.save(user);
+		user = userDao.save(user); // User tablosuna kaydet
+
+	    if (userDto.getRole() == Role.PATIENT) {
+	        // Eğer rol patient ise, Patient tablosuna da kaydedilsin
+	        Patient patient = new Patient();
+	        patient.setUser(user);  // Patient ile User'ı ilişkilendir
+	        patientDao.save(patient); // Patient tablosuna kaydet
+	    }
+	    else if (userDto.getRole() == Role.DOCTOR) {
+	    	Doctor doctor = new Doctor();
+	    	doctor.setUser(user);
+	    	doctorDao.save(doctor);
+	    }
+	    return user;
 	}
 
 	@Override
