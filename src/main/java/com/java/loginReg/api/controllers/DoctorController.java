@@ -69,40 +69,15 @@ public class DoctorController {
         );
     }
     
-    // Doktor bilgisini güncelleme
-    @PutMapping("/{id}")
-    public DoctorDto updateDoctor(@PathVariable Long id, @RequestBody DoctorDto doctorDto) {
-        Doctor doctor = doctorDao.findById(id).orElseThrow(() -> new RuntimeException("Doctor not found"));
-        User user = doctor.getUser();
-        
-        // Kullanıcı bilgilerini güncelle
-        user.setFirstName(doctorDto.getFirstName());
-        user.setLastName(doctorDto.getLastName());
-        user.setEmail(doctorDto.getEmail());
-        user.setPassword(doctorDto.getPassword());
-        
-        // Doktor bilgilerini güncelle
-        doctor.setWorkingDays(doctorDto.getWorkingDays());
-        doctor.setWorkingHours(doctorDto.getWorkingHours());
-        doctor.setHospital(doctorDto.getHospital());
-        doctor.setSpecialization(doctorDto.getSpecialty());
-        
-        // Veritabanına kaydet
-        userDao.save(user);
-        doctorDao.save(doctor);
-
-        return new DoctorDto(
-            user.getFirstName(),
-            user.getLastName(),
-            user.getEmail(),
-            user.getPassword(),
-            user.getRole(),
-            doctor.getWorkingDays(),
-            doctor.getWorkingHours(),
-            doctor.getHospital(),
-            doctor.getSpecialization()
-        );
-    }
+    @PutMapping("/update/{id}")
+	public ResponseEntity<String> updateDoctor(@PathVariable Long id, @RequestBody Doctor doctor) {
+		boolean isUpdated = doctorService.updateDoctor(id, doctor);
+		if(isUpdated) {
+			return ResponseEntity.ok("User updated successfully!");
+		} else {
+			return ResponseEntity.status(400).body("User not found!");
+		}
+	}
 
     // Uzmanlık alanına göre doktorları getiren endpoint
     @GetMapping("/doctors")

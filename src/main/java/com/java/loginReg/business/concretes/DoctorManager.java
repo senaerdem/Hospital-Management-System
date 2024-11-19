@@ -35,5 +35,18 @@ public class DoctorManager implements DoctorService{
     public List<Doctor> findBySpecialization(String specialization) {
         return doctorDao.findBySpecialization(specialization); // Repository üzerinden veriyi çekiyoruz
     }
+    
+    public boolean updateDoctor(Long id, Doctor doctor) {
+		if (doctorDao.existsById(id)) {
+	        Doctor existingDoctor = doctorDao.findById(id).orElseThrow();
+	        existingDoctor.setHospital(doctor.getHospital());
+	        existingDoctor.setSpecialization(doctor.getSpecialization());
+	        existingDoctor.setWorkingDays(doctor.getWorkingDays());
+	        existingDoctor.setWorkingHours(doctor.getWorkingHours());
+	        doctorDao.save(existingDoctor);
+	        return true;
+	    }
+		return false;
+	}
 	
 }

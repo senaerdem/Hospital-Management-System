@@ -14,5 +14,7 @@ public interface DoctorService {
 	
 	List<Doctor> findBySpecialization(String specialization);
 	
+	boolean updateDoctor(Long id, Doctor doctor);
+	
 
 }
