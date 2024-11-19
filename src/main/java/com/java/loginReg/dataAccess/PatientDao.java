@@ -11,4 +11,5 @@ public interface PatientDao extends JpaRepository<Patient, Long> {
 
     Optional<Patient> findByUser(User user);  // Kullanıcıya göre hastayı bulur
 
+    void deleteByUser(User user);
 }

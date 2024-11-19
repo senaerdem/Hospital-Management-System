@@ -79,13 +79,39 @@ public class UserManager implements UserService {
 	}
 
 	@Override
-	public boolean deleteUser(Long id) {
-		if (userDao.existsById(id)) {
-			userDao.deleteById(id);
-			return true;
-		}
-		return false;
+	public void deleteUser(Long userId) {
+	    // Kullanıcıyı bul
+	    User user = userDao.findById(userId).orElseThrow(() -> new IllegalStateException("Kullanıcı bulunamadı"));
+
+	    // Kullanıcının rolüne göre ilişkili randevuları kontrol et
+	    if (user.getRole() == Role.PATIENT) {
+	    	Patient patient = patientDao.findByUser(user).orElseThrow(() -> new IllegalStateException("Hasta bulunamadı"));
+
+	        if (patient != null) {
+	            // Hastaya ait randevuları sil
+	            List<Appointment> appointments = appointmentDao.findByPatient(patient);
+	            for (Appointment appointment : appointments) {
+	                appointmentDao.delete(appointment);
+	            }
+	            patientDao.delete(patient);  // Patient'ı sil
+	        }
+	    } else if (user.getRole() == Role.DOCTOR) {
+	    	Doctor doctor = doctorDao.findByUser(user).orElseThrow(() -> new IllegalStateException("Doktor bulunamadı"));
+
+	        if (doctor != null) {
+	            // Doktora ait randevuları sil
+	            List<Appointment> appointments = appointmentDao.findByDoctor(doctor);
+	            for (Appointment appointment : appointments) {
+	                appointmentDao.delete(appointment);
+	            }
+	            doctorDao.delete(doctor);  // Doctor'u sil
+	        }
+	    }
+
+	    // Son olarak User'ı sil
+	    userDao.delete(user); 
 	}
+
 
 	@Override
 	public boolean updateUser(Long id, User user) {

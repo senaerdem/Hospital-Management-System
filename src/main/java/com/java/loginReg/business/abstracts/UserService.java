@@ -18,7 +18,7 @@ public interface UserService {
 	
 	boolean authenticate(String email, String password, Role role);
 	
-	boolean deleteUser(Long id);
+	void deleteUser(Long userId);
 	
 	boolean updateUser(Long id, User user);
 	

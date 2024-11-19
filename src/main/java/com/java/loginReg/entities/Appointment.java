@@ -1,5 +1,6 @@
 package com.java.loginReg.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -16,10 +17,10 @@ public class Appointment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Doctor doctor;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Patient patient;
 	
 	@Enumerated(EnumType.STRING)
@@ -31,6 +32,7 @@ public class Appointment {
 
     @Column(name = "time")
     private String time;  // Seçilen saat
+   
 	 
 	public Appointment(Doctor doctor, Patient patient, Status status, String day, String time) {
 		super();

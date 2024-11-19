@@ -84,13 +84,14 @@ public class UserController {
 	
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> deleteUser(@PathVariable Long id) {
-		boolean isDeleted = userService.deleteUser(id);
-		if(isDeleted) {
-			return ResponseEntity.ok("User deleted successfully!");
-		} else {
-			return ResponseEntity.status(400).body("User not found!");
-		}
+	    try {
+	        userService.deleteUser(id);  // User'ı silme işlemi
+	        return ResponseEntity.ok("User deleted successfully!");
+	    } catch (Exception e) {
+	        return ResponseEntity.status(400).body("User not found!");
+	    }
 	}
+
 	
 	@PutMapping("/update/{id}")
 	public ResponseEntity<String> updateUser(@PathVariable Long id, @RequestBody User user) {

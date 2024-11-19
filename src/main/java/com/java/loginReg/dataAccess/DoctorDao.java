@@ -16,4 +16,6 @@ public interface DoctorDao extends JpaRepository<Doctor, Long> {
 	
 	Optional<Doctor> findByUser(User user);
 	
+	void deleteByUser(User user);
+	
 }
