@@ -38,22 +38,34 @@ public class UserManager implements UserService {
 	
 	@Override
 	public User save(UserDto userDto) {
-		User user = new User(userDto.getEmail(), userDto.getPassword(), userDto.getRole(), userDto.getGender(), userDto.getFirstName(), userDto.getLastName());
-		user = userDao.save(user); // User tablosuna kaydet
+	    // Eğer rol ADMIN ise, başka bir admin olup olmadığını kontrol edin
+	    if (userDto.getRole() == Role.ADMIN) {
+	        boolean adminExists = userDao.existsByRole(Role.ADMIN);
+	        if (adminExists) {
+	            throw new IllegalStateException("Sistemde zaten bir admin mevcut. Yeni bir admin kaydı yapılamaz.");
+	        }
+	    }
 
+	    // Yeni kullanıcı nesnesi oluşturuluyor
+	    User user = new User(userDto.getEmail(), userDto.getPassword(), userDto.getRole(), userDto.getGender(), userDto.getFirstName(), userDto.getLastName());
+
+	    // User tablosuna kaydet
+	    user = userDao.save(user); 
+
+	    // Role göre ilgili tabloya da kaydet
 	    if (userDto.getRole() == Role.PATIENT) {
-	        // Eğer rol patient ise, Patient tablosuna da kaydedilsin
 	        Patient patient = new Patient();
 	        patient.setUser(user);  // Patient ile User'ı ilişkilendir
 	        patientDao.save(patient); // Patient tablosuna kaydet
+	    } else if (userDto.getRole() == Role.DOCTOR) {
+	        Doctor doctor = new Doctor();
+	        doctor.setUser(user);
+	        doctorDao.save(doctor);
 	    }
-	    else if (userDto.getRole() == Role.DOCTOR) {
-	    	Doctor doctor = new Doctor();
-	    	doctor.setUser(user);
-	    	doctorDao.save(doctor);
-	    }
+
 	    return user;
 	}
+
 
 	@Override
 	public boolean authenticate(String email, String password, Role role) {
