@@ -2,11 +2,14 @@ package com.java.loginReg.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Doctor {
@@ -22,8 +25,9 @@ public class Doctor {
 	@Column(name = "specialization")
 	private String specialization;
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "hospital_id", referencedColumnName = "id")
+	@JsonBackReference // Döngüsel referansları engeller
 	private Hospital hospital;
 	
 	@Column(name = "working_days")

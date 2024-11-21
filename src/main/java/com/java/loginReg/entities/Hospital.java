@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Hospital {
 
@@ -22,7 +24,17 @@ public class Hospital {
 	private String city;
 	
 	@OneToOne(mappedBy = "hospital", cascade = CascadeType.ALL)
+	@JsonManagedReference
 	private Doctor doctor;
+
+	public Hospital() {
+		super();
+	}
+	
+	public Hospital(String name, String city) {
+        this.name = name;
+        this.city = city;
+    }
 
 	public Long getId() {
 		return id;
