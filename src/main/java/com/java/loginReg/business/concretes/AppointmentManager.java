@@ -26,6 +26,7 @@ public class AppointmentManager implements AppointmentService {
     @Autowired
     private PatientDao patientDao;
     
+    // Randevu oluşturmak için method
     @Override
     public Appointment createAppointment(Long doctorId, Long patientId, String day, String time) {
         // İlgili doktor ve hasta verilerini al
@@ -50,10 +51,11 @@ public class AppointmentManager implements AppointmentService {
 		return appointmentDao.findAll();
 	}
 
+    // Randevu silmek için method
     @Override
 	public boolean deleteAppointment(Long id) {
-		if (appointmentDao.existsById(id)) {
-			appointmentDao.deleteById(id);
+		if (appointmentDao.existsById(id)) { // Veritabanında randevu bulunduysa
+			appointmentDao.deleteById(id); // Randevu silinir
 			return true;
 		}
 		return false;

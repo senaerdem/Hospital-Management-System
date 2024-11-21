@@ -73,6 +73,7 @@ public class UserController {
 	    }
 	}
 
+	// Tüm kullanıcıları getiren endpoint
 	@GetMapping("/all")
     public ResponseEntity<List<User>> getAllUsers(@RequestParam Role role) {
 		if (role != Role.ADMIN) {
@@ -82,6 +83,7 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 	
+	// Kullanıcı silmek için endpoint
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> deleteUser(@PathVariable Long id) {
 	    try {
@@ -92,7 +94,7 @@ public class UserController {
 	    }
 	}
 
-	
+	// Kullanıcı güncellemek için endpoint
 	@PutMapping("/update/{id}")
 	public ResponseEntity<String> updateUser(@PathVariable Long id, @RequestBody User user) {
 		boolean isUpdated = userService.updateUser(id, user);
@@ -103,6 +105,7 @@ public class UserController {
 		}
 	}
 	
+	// Tüm randevuları getiren endpoint
 	@GetMapping("/appointments")
     public ResponseEntity<List<Appointment>> getAllAppointments(@RequestParam Role role) {
 		if (role != Role.ADMIN) {
@@ -112,6 +115,7 @@ public class UserController {
         return ResponseEntity.ok(appointments);
     }
 	
+	// Randevu silme endpointi
 	@DeleteMapping("/appointments/delete/{id}")
 	public ResponseEntity<String> deleteAppointment(@PathVariable Long id) {
 		boolean isDeleted = appointmentService.deleteAppointment(id);

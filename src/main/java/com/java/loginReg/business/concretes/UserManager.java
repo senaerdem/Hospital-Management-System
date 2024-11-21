@@ -80,7 +80,7 @@ public class UserManager implements UserService {
 
 	@Override
 	public void deleteUser(Long userId) {
-	    // Kullanıcıyı bul
+	    // Kullanıcıyı veritabanında bul
 	    User user = userDao.findById(userId).orElseThrow(() -> new IllegalStateException("Kullanıcı bulunamadı"));
 
 	    // Kullanıcının rolüne göre ilişkili randevuları kontrol et
@@ -112,10 +112,9 @@ public class UserManager implements UserService {
 	    userDao.delete(user); 
 	}
 
-
 	@Override
 	public boolean updateUser(Long id, User user) {
-		if (userDao.existsById(id)) {
+		if (userDao.existsById(id)) { // 
             User existingUser = userDao.findById(id).orElseThrow();
             existingUser.setFirstName(user.getFirstName());
             existingUser.setLastName(user.getLastName());
@@ -133,7 +132,6 @@ public class UserManager implements UserService {
 	public User getUserByEmail(String email) {
 	    return userDao.findByEmail(email);
 	}
-	
 
 	public Map<String, Object> getUserIdByCredentials(String email, String password, Role role) {
 	    Optional<User> user = userDao.findByEmailAndPasswordAndRole(email, password, role);

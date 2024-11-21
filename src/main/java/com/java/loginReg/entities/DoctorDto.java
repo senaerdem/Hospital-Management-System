@@ -6,16 +6,15 @@ public class DoctorDto {
     private String lastName;
     private String email;
     private String password;
-    private Role role;  // Role (doctor)
+    private Role role;
     
-    // Diğer doktor bilgileri (isteğe bağlı)
     private String workingDays;
     private String workingHours;
-    private String hospital;
+    private Hospital hospital;
     private String specialty;
     
 	public DoctorDto(String firstName, String lastName, String email, String password, Role role, String workingDays,
-			String workingHours, String hospital, String specialty) {
+			String workingHours, Hospital hospital, String specialty) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -68,10 +67,10 @@ public class DoctorDto {
 	public void setWorkingHours(String workingHours) {
 		this.workingHours = workingHours;
 	}
-	public String getHospital() {
+	public Hospital getHospital() {
 		return hospital;
 	}
-	public void setHospital(String hospital) {
+	public void setHospital(Hospital hospital) {
 		this.hospital = hospital;
 	}
 	public String getSpecialty() {

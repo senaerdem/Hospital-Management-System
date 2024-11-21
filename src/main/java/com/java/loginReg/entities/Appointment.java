@@ -18,10 +18,10 @@ public class Appointment {
 	private Long id;
 	 
 	@ManyToOne(cascade = CascadeType.ALL)
-	private Doctor doctor;
+	private Doctor doctor; // Bir doktorun birden fazla randevusu olabilir
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	private Patient patient;
+	private Patient patient; // Bir hastanın birden fazla randevusu olabilir
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "status")

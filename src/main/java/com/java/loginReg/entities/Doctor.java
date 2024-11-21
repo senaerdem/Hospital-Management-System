@@ -1,6 +1,5 @@
 package com.java.loginReg.entities;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 @Entity
 public class Doctor {
@@ -24,8 +22,9 @@ public class Doctor {
 	@Column(name = "specialization")
 	private String specialization;
 	
-	@Column(name = "hospital")
-	private String hospital;
+	@OneToOne
+	@JoinColumn(name = "hospital_id", referencedColumnName = "id")
+	private Hospital hospital;
 	
 	@Column(name = "working_days")
 	private String workingDays;
@@ -33,7 +32,7 @@ public class Doctor {
 	@Column(name = "working_hours")
 	private String workingHours;
 	
-	public Doctor(User user, String specialization, String hospital, String workingDays, String workingHours) {
+	public Doctor(User user, String specialization, Hospital hospital, String workingDays, String workingHours) {
 		super();
 		this.user = user;
 		this.specialization = specialization;
@@ -66,11 +65,11 @@ public class Doctor {
 		this.specialization = specialization;
 	}
 
-	public String getHospital() {
+	public Hospital getHospital() {
 		return hospital;
 	}
 
-	public void setHospital(String hospital) {
+	public void setHospital(Hospital hospital) {
 		this.hospital = hospital;
 	}
 

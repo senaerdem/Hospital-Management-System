@@ -51,7 +51,7 @@ public class DoctorController {
 		return ResponseEntity.ok(savedDoctor);
 	}
 
-	// Doktor bilgilerini almak için
+	// Doktor bilgilerini almak için endpoint
     @GetMapping("/{id}")
     public DoctorDto getDoctorById(@PathVariable Long id) {
         Doctor doctor = doctorDao.findById(id).orElseThrow(() -> new RuntimeException("Doctor not found"));
@@ -69,6 +69,7 @@ public class DoctorController {
         );
     }
     
+    // Doktor bilgierini düzenlemek için endpoint
     @PutMapping("/update/{id}")
 	public ResponseEntity<String> updateDoctor(@PathVariable Long id, @RequestBody Doctor doctor) {
 		boolean isUpdated = doctorService.updateDoctor(id, doctor);

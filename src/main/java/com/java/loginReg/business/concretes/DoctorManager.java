@@ -36,14 +36,16 @@ public class DoctorManager implements DoctorService{
         return doctorDao.findBySpecialization(specialization); // Repository üzerinden veriyi çekiyoruz
     }
     
+    // Doktoru günceller
     public boolean updateDoctor(Long id, Doctor doctor) {
-		if (doctorDao.existsById(id)) {
-	        Doctor existingDoctor = doctorDao.findById(id).orElseThrow();
+		if (doctorDao.existsById(id)) { // güncellenecek doktorun ID'sinin veritabanında olup olmadığını kontrol et
+	        Doctor existingDoctor = doctorDao.findById(id).orElseThrow(); // veritabanından mevcut doktor bilgilerini getir, bulunamazsa hata fırlat
+	        // Güncellenmiş bilgileri set et
 	        existingDoctor.setHospital(doctor.getHospital());
 	        existingDoctor.setSpecialization(doctor.getSpecialization());
 	        existingDoctor.setWorkingDays(doctor.getWorkingDays());
 	        existingDoctor.setWorkingHours(doctor.getWorkingHours());
-	        doctorDao.save(existingDoctor);
+	        doctorDao.save(existingDoctor); // Güncellenen bilgileri veritabanına kaydet
 	        return true;
 	    }
 		return false;
