@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.java.loginReg.business.abstracts.DoctorService;
 import com.java.loginReg.dataAccess.DoctorDao;
 import com.java.loginReg.entities.Doctor;
+import com.java.loginReg.entities.Specialization;
 import com.java.loginReg.entities.User;
 
 @Service
@@ -32,7 +33,7 @@ public class DoctorManager implements DoctorService{
     }
 
     // Uzmanlık alanına göre doktorları getir
-    public List<Doctor> findBySpecialization(String specialization) {
+    public List<Doctor> findBySpecialization(Specialization specialization) {
         return doctorDao.findBySpecialization(specialization); // Repository üzerinden veriyi çekiyoruz
     }
     

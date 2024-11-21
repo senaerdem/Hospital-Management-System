@@ -16,11 +16,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.java.loginReg.business.abstracts.DoctorService;
+import com.java.loginReg.business.abstracts.SpecializationService;
 import com.java.loginReg.dataAccess.DoctorDao;
 import com.java.loginReg.dataAccess.UserDao;
 import com.java.loginReg.entities.Doctor;
 import com.java.loginReg.entities.DoctorDto;
 import com.java.loginReg.entities.Role;
+import com.java.loginReg.entities.Specialization;
 import com.java.loginReg.entities.User;
 
 @RestController
@@ -35,6 +37,9 @@ public class DoctorController {
 
     @Autowired
     private UserDao userDao;
+    
+    @Autowired
+    private SpecializationService specializationService;
 	
 	@GetMapping("/all")
     public ResponseEntity<List<Doctor>> getAllDoctors(@RequestParam Role role) {
@@ -65,7 +70,7 @@ public class DoctorController {
             doctor.getWorkingDays(),
             doctor.getWorkingHours(),
             doctor.getHospital().getName(),
-            doctor.getSpecialization()
+            doctor.getSpecialization().getName()
         );
     }
     
@@ -82,8 +87,9 @@ public class DoctorController {
 
     // Uzmanlık alanına göre doktorları getiren endpoint
     @GetMapping("/doctors")
-    public List<Doctor> getDoctorsBySpecialization(@RequestParam String specialization) {
-        return doctorService.findBySpecialization(specialization); // DoctorService'den gelen listi döndürüyoruz
+    public List<Doctor> getDoctorsBySpecialization(@RequestParam String specializationName) {
+    	Specialization specialization = specializationService.findByName(specializationName);
+        return doctorService.findBySpecialization(specialization);
     }
 
 
