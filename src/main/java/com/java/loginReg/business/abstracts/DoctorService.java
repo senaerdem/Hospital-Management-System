@@ -16,4 +16,5 @@ public interface DoctorService {
 	
 	boolean updateDoctor(Long id, Doctor doctor);
 	
+
 }

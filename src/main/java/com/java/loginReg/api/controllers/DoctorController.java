@@ -64,7 +64,7 @@ public class DoctorController {
             user.getRole(),
             doctor.getWorkingDays(),
             doctor.getWorkingHours(),
-            doctor.getHospital(),
+            doctor.getHospital().getName(),
             doctor.getSpecialization()
         );
     }

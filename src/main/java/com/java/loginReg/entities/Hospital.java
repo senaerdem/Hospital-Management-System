@@ -8,7 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Hospital {
@@ -24,7 +24,7 @@ public class Hospital {
 	private String city;
 	
 	@OneToOne(mappedBy = "hospital", cascade = CascadeType.ALL)
-	@JsonManagedReference
+	@JsonBackReference
 	private Doctor doctor;
 
 	public Hospital() {

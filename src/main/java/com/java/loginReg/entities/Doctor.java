@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Doctor {
@@ -27,7 +29,8 @@ public class Doctor {
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "hospital_id", referencedColumnName = "id")
-	@JsonBackReference // Döngüsel referansları engeller
+	@JsonManagedReference 
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 	private Hospital hospital;
 	
 	@Column(name = "working_days")
