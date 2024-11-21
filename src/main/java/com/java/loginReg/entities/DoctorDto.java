@@ -11,10 +11,10 @@ public class DoctorDto {
     private String workingDays;
     private String workingHours;
     private String hospital;
-    private String specialty;
+    private String specialization;
     
 	public DoctorDto(String firstName, String lastName, String email, String password, Role role, String workingDays,
-			String workingHours, String hospital, String specialty) {
+			String workingHours, String hospital, String specialization) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -23,7 +23,7 @@ public class DoctorDto {
 		this.workingDays = workingDays;
 		this.workingHours = workingHours;
 		this.hospital = hospital;
-		this.specialty = specialty;
+		this.specialization = specialization;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -74,10 +74,10 @@ public class DoctorDto {
 		this.hospital = hospital;
 	}
 	public String getSpecialty() {
-		return specialty;
+		return specialization;
 	}
-	public void setSpecialty(String specialty) {
-		this.specialty = specialty;
+	public void setSpecialty(String specialization) {
+		this.specialization = specialization;
 	}
 	
 	@Override
@@ -90,7 +90,7 @@ public class DoctorDto {
 	           ", workingDays='" + workingDays + '\'' +
 	           ", workingHours='" + workingHours + '\'' +
 	           ", hospital='" + hospital + '\'' +
-	           ", specialty='" + specialty + '\'' +
+	           ", specialty='" + specialization + '\'' +
 	           '}';
 	}
 

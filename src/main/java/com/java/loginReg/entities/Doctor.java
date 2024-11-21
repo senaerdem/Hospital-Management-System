@@ -24,8 +24,11 @@ public class Doctor {
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
 	
-	@Column(name = "specialization")
-	private String specialization;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "specialization_id", referencedColumnName = "id")
+	@JsonManagedReference 
+	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	private Specialization specialization;
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "hospital_id", referencedColumnName = "id")
@@ -39,7 +42,7 @@ public class Doctor {
 	@Column(name = "working_hours")
 	private String workingHours;
 	
-	public Doctor(User user, String specialization, Hospital hospital, String workingDays, String workingHours) {
+	public Doctor(User user, Specialization specialization, Hospital hospital, String workingDays, String workingHours) {
 		super();
 		this.user = user;
 		this.specialization = specialization;
@@ -64,11 +67,11 @@ public class Doctor {
 		this.user = user;
 	}
 
-	public String getSpecialization() {
+	public Specialization getSpecialization() {
 		return specialization;
 	}
 
-	public void setSpecialization(String specialization) {
+	public void setSpecialization(Specialization specialization) {
 		this.specialization = specialization;
 	}
 
