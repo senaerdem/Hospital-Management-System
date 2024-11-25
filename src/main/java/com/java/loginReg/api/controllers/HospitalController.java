@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,4 +37,15 @@ public class HospitalController {
         List<Hospital> hospitals = hospitalService.getAllHospitals();
         return ResponseEntity.ok(hospitals);
     }
+	
+	// Hastabe silme endpointi
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<String> deleteHospital(@PathVariable Long id) {
+		boolean isDeleted = hospitalService.deleteHospital(id);
+		if(isDeleted) {
+			return ResponseEntity.ok("Appointment deleted successfully!");
+		} else {
+			return ResponseEntity.status(400).body("Appointment not found!");
+		}
+	}
 }

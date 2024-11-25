@@ -9,4 +9,6 @@ public interface HospitalService {
 	Hospital addHospital(Hospital hospital);
 	
 	List<Hospital> getAllHospitals();
+	
+	boolean deleteHospital(Long id);
 }

@@ -26,4 +26,13 @@ public class HospitalManager implements HospitalService {
     public List<Hospital> getAllHospitals() {
         return hospitalDao.findAll();
     }
+	
+	@Override
+	public boolean deleteHospital(Long id) {
+		if (hospitalDao.existsById(id)) { // Veritabanında randevu bulunduysa
+			hospitalDao.deleteById(id); // Randevu silinir
+			return true;
+		}
+		return false;
+	}
 }
