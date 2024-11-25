@@ -9,13 +9,12 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.java.loginReg.business.abstracts.HospitalService;
 import com.java.loginReg.business.abstracts.SpecializationService;
-import com.java.loginReg.entities.Hospital;
 import com.java.loginReg.entities.Specialization;
 
 @RestController
@@ -48,6 +47,17 @@ public class SpecializationController {
 			return ResponseEntity.ok("Specilization deleted successfully!");
 		} else {
 			return ResponseEntity.status(400).body("Specilization not found!");
+		}
+	}
+	
+	// Uzmanlık güncellemek için endpoint
+	@PutMapping("/update/{id}")
+	public ResponseEntity<String> updateSpecialization(@PathVariable Long id, @RequestBody Specialization specialization) {
+		boolean isUpdated = specializationService.updateSpecialization(id, specialization);
+		if(isUpdated) {
+			return ResponseEntity.ok("Specialization updated successfully!");
+		} else {
+			return ResponseEntity.status(400).body("Specialization not found!");
 		}
 	}
 

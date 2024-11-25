@@ -4,12 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.java.loginReg.business.abstracts.SpecializationService;
-import com.java.loginReg.dataAccess.HospitalDao;
 import com.java.loginReg.dataAccess.SpecializationDao;
-import com.java.loginReg.entities.Hospital;
 import com.java.loginReg.entities.Specialization;
 
 @Service
@@ -41,6 +38,16 @@ public class SpecializationManager implements SpecializationService{
 			specializationDao.deleteById(id); // Uzmanlık silinir
 			return true;
 		}
+		return false;
+	}
+	
+	@Override
+	public boolean updateSpecialization(Long id, Specialization specialization) {
+		if (specializationDao.existsById(id)) { // 
+            Specialization existingSpecialization = specializationDao.findById(id).orElseThrow();
+            existingSpecialization.setName(specialization.getName());
+            return true;
+        }
 		return false;
 	}
 }
