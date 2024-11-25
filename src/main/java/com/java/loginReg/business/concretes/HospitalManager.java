@@ -30,8 +30,8 @@ public class HospitalManager implements HospitalService {
 	
 	@Override
 	public boolean deleteHospital(Long id) {
-		if (hospitalDao.existsById(id)) { // Veritabanında randevu bulunduysa
-			hospitalDao.deleteById(id); // Randevu silinir
+		if (hospitalDao.existsById(id)) { // Veritabanında hastane bulunduysa
+			hospitalDao.deleteById(id); // Hastane silinir
 			return true;
 		}
 		return false;

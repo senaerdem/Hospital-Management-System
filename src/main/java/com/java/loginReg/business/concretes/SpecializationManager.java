@@ -34,4 +34,13 @@ public class SpecializationManager implements SpecializationService{
         return specializationDao.findByName(name)
                 .orElseThrow(() -> new IllegalArgumentException("Specialization not found with name: " + name));
     }
+	
+	@Override
+	public boolean deleteSpecialization(Long id) {
+		if (specializationDao.existsById(id)) { // Veritabanında uzmanlık bulunduysa
+			specializationDao.deleteById(id); // Uzmanlık silinir
+			return true;
+		}
+		return false;
+	}
 }
