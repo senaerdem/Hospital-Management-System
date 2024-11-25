@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.java.loginReg.business.abstracts.HospitalService;
 import com.java.loginReg.dataAccess.HospitalDao;
 import com.java.loginReg.entities.Hospital;
+import com.java.loginReg.entities.User;
 
 @Service
 public class HospitalManager implements HospitalService {
@@ -33,6 +34,18 @@ public class HospitalManager implements HospitalService {
 			hospitalDao.deleteById(id); // Randevu silinir
 			return true;
 		}
+		return false;
+	}
+	
+	@Override
+	public boolean updateHospital(Long id, Hospital hospital) {
+		if (hospitalDao.existsById(id)) { // 
+            Hospital existingHospital = hospitalDao.findById(id).orElseThrow();
+            existingHospital.setName(hospital.getName());
+            existingHospital.setCity(hospital.getCity());
+            hospitalDao.save(existingHospital);
+            return true;
+        }
 		return false;
 	}
 }

@@ -11,4 +11,6 @@ public interface HospitalService {
 	List<Hospital> getAllHospitals();
 	
 	boolean deleteHospital(Long id);
+	
+	boolean updateHospital(Long id, Hospital hospital);
 }

@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.java.loginReg.business.abstracts.HospitalService;
 import com.java.loginReg.entities.Hospital;
+import com.java.loginReg.entities.User;
 
 @RestController
 @RequestMapping("/hospitals")
@@ -38,7 +40,7 @@ public class HospitalController {
         return ResponseEntity.ok(hospitals);
     }
 	
-	// Hastabe silme endpointi
+	// Hastane silme endpointi
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> deleteHospital(@PathVariable Long id) {
 		boolean isDeleted = hospitalService.deleteHospital(id);
@@ -46,6 +48,17 @@ public class HospitalController {
 			return ResponseEntity.ok("Appointment deleted successfully!");
 		} else {
 			return ResponseEntity.status(400).body("Appointment not found!");
+		}
+	}
+	
+	// Hastane güncellemek için endpoint
+	@PutMapping("/update/{id}")
+	public ResponseEntity<String> updateHospital(@PathVariable Long id, @RequestBody Hospital hospital) {
+		boolean isUpdated = hospitalService.updateHospital(id, hospital);
+		if(isUpdated) {
+			return ResponseEntity.ok("Hospital updated successfully!");
+		} else {
+			return ResponseEntity.status(400).body("User not found!");
 		}
 	}
 }
