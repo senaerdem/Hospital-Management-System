@@ -17,4 +17,7 @@ public interface AppointmentDao extends JpaRepository<Appointment, Long> {
 	 List<Appointment> findByPatient(Patient patient);
 	 
 	 List<Appointment> findByDoctor(Doctor doctor);
+	 
+	 // Doktorun o gün ve saatteki randevuları getiren metod
+	 List<Appointment> findByDoctorIdAndDayAndTime(Long doctorId, String day, String time);
 }

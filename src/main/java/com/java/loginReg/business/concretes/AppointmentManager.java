@@ -85,4 +85,14 @@ public class AppointmentManager implements AppointmentService {
     public List<Appointment> getAppointmentsByPatientId(Long patientId) {
         return appointmentDao.findByPatientId(patientId);
     }
+    
+ // AppointmentService'de doktorun uygunluğunu kontrol etmek için metot
+
+    public boolean isDoctorAvailable(Long doctorId, String day, String time) {
+        // Bu metod, doktorun daha önce randevu alıp almadığını kontrol eder
+        List<Appointment> appointments = appointmentDao.findByDoctorIdAndDayAndTime(doctorId, day, time);
+
+        // Eğer randevu varsa, doktor o saatte müsait değildir
+        return appointments.isEmpty();
+    }
 }

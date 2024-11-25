@@ -3,6 +3,7 @@ package com.java.loginReg.api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,16 +29,35 @@ public class AppointmentController {
 	private AppointmentService appointmentService;
 	
 	
+	// /create endpoint'inde randevu oluşturulacak ve Appointment nesnesi döndürülecek
 	@PostMapping("/create")
-	public Appointment createAppointment(@RequestBody AppointmentDto appointmentRequest) {
-	    // AppointmentService'i kullanarak randevuyu oluşturma
-	    return appointmentService.createAppointment(
+	public ResponseEntity<Appointment> createAppointment(@RequestBody AppointmentDto appointmentRequest) {
+	    // Randevu oluşturulmadan önce doktorun uygunluğunu kontrol ediyoruz
+	    boolean isAvailable = appointmentService.isDoctorAvailable(
+	        appointmentRequest.getDoctorId(), 
+	        appointmentRequest.getDay(), 
+	        appointmentRequest.getTime()
+	    );
+
+	    if (!isAvailable) {
+	        // Eğer doktor uygun değilse, hatalı bir mesaj dönüyoruz
+	        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+	                             .body(null);  // Veya uygun bir hata mesajı dönebilirsiniz
+	    }
+
+	    // Eğer doktor uygun ise, randevuyu oluşturuyoruz
+	    Appointment appointment = appointmentService.createAppointment(
 	        appointmentRequest.getDoctorId(), 
 	        appointmentRequest.getPatientId(), 
 	        appointmentRequest.getDay(), 
 	        appointmentRequest.getTime()
 	    );
+
+	    // Başarılı bir şekilde randevu oluşturulduysa, Appointment nesnesi döndürüyoruz
+	    return ResponseEntity.ok(appointment);
 	}
+
+
 	
 	// Doctor id'ye göre randevuları listeleyen endpoint
 	@GetMapping("/doctor/{doctorId}")
@@ -67,5 +87,24 @@ public class AppointmentController {
         List<Appointment> appointments = appointmentService.getAppointmentsByPatientId(patientId);
         return ResponseEntity.ok(appointments);
     }
+    
+ // AppointmentController'da, doktorun belirli bir günde ve saatte uygun olup olmadığını kontrol eden endpoint
+
+    @GetMapping("/check-availability")
+    public ResponseEntity<String> checkAvailability(
+        @RequestParam Long doctorId, 
+        @RequestParam String day, 
+        @RequestParam String time) {
+
+        boolean isAvailable = appointmentService.isDoctorAvailable(doctorId, day, time);
+
+        if (isAvailable) {
+            return ResponseEntity.ok("Doctor is available at this time.");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                                 .body("Doctor is not available at this time.");
+        }
+    }
+
 
 }

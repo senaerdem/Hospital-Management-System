@@ -46,6 +46,7 @@ public class SpecializationManager implements SpecializationService{
 		if (specializationDao.existsById(id)) { // 
             Specialization existingSpecialization = specializationDao.findById(id).orElseThrow();
             existingSpecialization.setName(specialization.getName());
+            specializationDao.save(existingSpecialization);
             return true;
         }
 		return false;
