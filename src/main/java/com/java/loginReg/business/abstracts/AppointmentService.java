@@ -20,4 +20,6 @@ public interface AppointmentService {
 	List<Appointment> getAppointmentsByPatientId(Long patientId);
 
 	boolean isDoctorAvailable(Long doctorId, String day, String time);
+	
+	Appointment updateAppointment(Long appointmentId, String day, String time);
 }

@@ -88,8 +88,7 @@ public class AppointmentController {
         return ResponseEntity.ok(appointments);
     }
     
- // AppointmentController'da, doktorun belirli bir günde ve saatte uygun olup olmadığını kontrol eden endpoint
-
+    // Doktorun belirli bir günde ve saatte uygun olup olmadığını kontrol eden endpoint
     @GetMapping("/check-availability")
     public ResponseEntity<String> checkAvailability(
         @RequestParam Long doctorId, 
@@ -105,6 +104,17 @@ public class AppointmentController {
                                  .body("Doctor is not available at this time.");
         }
     }
+    
+    // Randevu güncelleyen endpoint
+    @PutMapping("/update/{appointmentId}")
+    public ResponseEntity<Appointment> updateAppointment( @PathVariable Long appointmentId, @RequestParam String day, String time) {
+    	Appointment updatedAppointment = appointmentService.updateAppointment(appointmentId, day, time);
+    	if (updatedAppointment == null) {
+            return ResponseEntity.notFound().build();
+        }
 
-
+        return ResponseEntity.ok(updatedAppointment);
+    }
+    
+    
 }
