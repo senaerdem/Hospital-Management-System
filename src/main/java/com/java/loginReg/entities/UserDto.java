@@ -8,8 +8,9 @@ public class UserDto {
 	private Gender gender;
 	private String firstName;
 	private String lastName;
+	private Long specializationId; // Uzmanlık ID'si eklendi
 	
-	public UserDto(String email, String password, Role role, Gender gender, String firstName, String lastName) {
+	public UserDto(String email, String password, Role role, Gender gender, String firstName, String lastName, Long specializationId) {
 		super();
 		this.email = email;
 		this.password = password;
@@ -17,6 +18,7 @@ public class UserDto {
 		this.gender = gender;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.specializationId = specializationId;
 	}
 
 	public String getEmail() {
@@ -65,6 +67,14 @@ public class UserDto {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public Long getSpecializationId() {
+		return specializationId;
+	}
+
+	public void setSpecializationId(Long specializationId) {
+		this.specializationId = specializationId;
 	}
 	
 	

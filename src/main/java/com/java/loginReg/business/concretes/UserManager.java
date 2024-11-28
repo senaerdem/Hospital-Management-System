@@ -13,11 +13,13 @@ import com.java.loginReg.business.abstracts.UserService;
 import com.java.loginReg.dataAccess.AppointmentDao;
 import com.java.loginReg.dataAccess.DoctorDao;
 import com.java.loginReg.dataAccess.PatientDao;
+import com.java.loginReg.dataAccess.SpecializationDao;
 import com.java.loginReg.dataAccess.UserDao;
 import com.java.loginReg.entities.Appointment;
 import com.java.loginReg.entities.Doctor;
 import com.java.loginReg.entities.Patient;
 import com.java.loginReg.entities.Role;
+import com.java.loginReg.entities.Specialization;
 import com.java.loginReg.entities.User;
 import com.java.loginReg.entities.UserDto;
 
@@ -35,6 +37,9 @@ public class UserManager implements UserService {
 	
 	@Autowired
 	private AppointmentDao appointmentDao;
+	
+	@Autowired
+	private SpecializationDao specializationDao;
 	
 	@Override
 	public User save(UserDto userDto) {
@@ -60,6 +65,11 @@ public class UserManager implements UserService {
 	    } else if (userDto.getRole() == Role.DOCTOR) {
 	        Doctor doctor = new Doctor();
 	        doctor.setUser(user);
+	        
+	        if(userDto.getSpecializationId() != null) {
+	        	Specialization specialization = specializationDao.findById(userDto.getSpecializationId()).orElseThrow(() -> new IllegalArgumentException("Specialization not found"));
+	        	doctor.setSpecialization(specialization);
+	        }
 	        doctorDao.save(doctor);
 	    }
 
