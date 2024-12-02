@@ -73,10 +73,10 @@ public class DoctorDto {
 	public void setHospital(String hospital) {
 		this.hospital = hospital;
 	}
-	public String getSpecialty() {
+	public String getSpecialization() {
 		return specialization;
 	}
-	public void setSpecialty(String specialization) {
+	public void setSpecialization(String specialization) {
 		this.specialization = specialization;
 	}
 	
@@ -90,7 +90,7 @@ public class DoctorDto {
 	           ", workingDays='" + workingDays + '\'' +
 	           ", workingHours='" + workingHours + '\'' +
 	           ", hospital='" + hospital + '\'' +
-	           ", specialty='" + specialization + '\'' +
+	           ", specialization='" + specialization + '\'' +
 	           '}';
 	}
 

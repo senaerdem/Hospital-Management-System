@@ -3,6 +3,7 @@ package com.java.loginReg.business.abstracts;
 import java.util.List;
 
 import com.java.loginReg.entities.Doctor;
+import com.java.loginReg.entities.DoctorDto;
 import com.java.loginReg.entities.Specialization;
 
 public interface DoctorService {
@@ -15,7 +16,7 @@ public interface DoctorService {
 	
 	List<Doctor> findBySpecialization(Specialization specialization);
 	
-	boolean updateDoctor(Long id, Doctor doctor);
+	boolean updateDoctor(Long id, DoctorDto doctorDto);
 	
 
 }

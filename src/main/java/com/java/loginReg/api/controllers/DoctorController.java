@@ -76,8 +76,8 @@ public class DoctorController {
     
     // Doktor bilgierini düzenlemek için endpoint
     @PutMapping("/update/{id}")
-	public ResponseEntity<String> updateDoctor(@PathVariable Long id, @RequestBody Doctor doctor) {
-		boolean isUpdated = doctorService.updateDoctor(id, doctor);
+	public ResponseEntity<String> updateDoctor(@PathVariable Long id, @RequestBody DoctorDto doctorDto) {
+		boolean isUpdated = doctorService.updateDoctor(id, doctorDto);
 		if(isUpdated) {
 			return ResponseEntity.ok("User updated successfully!");
 		} else {
