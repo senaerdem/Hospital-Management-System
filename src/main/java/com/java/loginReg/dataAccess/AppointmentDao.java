@@ -1,6 +1,7 @@
 package com.java.loginReg.dataAccess;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -20,4 +21,8 @@ public interface AppointmentDao extends JpaRepository<Appointment, Long> {
 	 
 	 // Doktorun o gün ve saatteki randevuları getiren metod
 	 List<Appointment> findByDoctorIdAndDayAndTime(Long doctorId, String day, String time);
+	 
+	 List<Appointment> findByDoctorIdAndDayIn(Long doctorId, List<String> days);
+
+
 }

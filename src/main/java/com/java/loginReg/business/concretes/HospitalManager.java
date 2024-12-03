@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.java.loginReg.business.abstracts.HospitalService;
 import com.java.loginReg.dataAccess.HospitalDao;
 import com.java.loginReg.entities.Hospital;
+import com.java.loginReg.entities.HospitalRequestDto;
 import com.java.loginReg.entities.User;
 
 @Service
@@ -28,6 +29,7 @@ public class HospitalManager implements HospitalService {
         return hospitalDao.findAll();
     }
 	
+	// Hastane silmek için method
 	@Override
 	public boolean deleteHospital(Long id) {
 		if (hospitalDao.existsById(id)) { // Veritabanında hastane bulunduysa
@@ -37,13 +39,14 @@ public class HospitalManager implements HospitalService {
 		return false;
 	}
 	
+	//Hastane güncellemek için method
 	@Override
-	public boolean updateHospital(Long id, Hospital hospital) {
-		if (hospitalDao.existsById(id)) { // 
-            Hospital existingHospital = hospitalDao.findById(id).orElseThrow();
-            existingHospital.setName(hospital.getName());
-            existingHospital.setCity(hospital.getCity());
-            hospitalDao.save(existingHospital);
+	public boolean updateHospital(Long id, HospitalRequestDto hospitalRequestDto) {
+		Hospital existingHospital = hospitalDao.findById(id).orElseThrow(); // Veritabanındaki mevcut hastane bilgilerini al
+		if (existingHospital != null) { // Eğer hastane veritabanında mevcutsa
+            existingHospital.setName(hospitalRequestDto.getName()); // Yeni isimle güncelle
+            existingHospital.setCity(hospitalRequestDto.getCity()); // Yeni şehirle güncelle
+            hospitalDao.save(existingHospital); // Güncellenmiş hastane kaydını kaydet
             return true;
         }
 		return false;
