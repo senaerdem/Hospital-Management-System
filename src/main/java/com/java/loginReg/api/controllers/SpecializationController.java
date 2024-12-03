@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.java.loginReg.business.abstracts.SpecializationService;
 import com.java.loginReg.entities.Specialization;
+import com.java.loginReg.entities.SpecializationRequestDto;
 
 @RestController
 @RequestMapping("/specializations")
@@ -52,8 +53,8 @@ public class SpecializationController {
 	
 	// Uzmanlık güncellemek için endpoint
 	@PutMapping("/update/{id}")
-	public ResponseEntity<String> updateSpecialization(@PathVariable Long id, @RequestBody Specialization specialization) {
-		boolean isUpdated = specializationService.updateSpecialization(id, specialization);
+	public ResponseEntity<String> updateSpecialization(@PathVariable Long id, @RequestBody SpecializationRequestDto specializationRequestDto) {
+		boolean isUpdated = specializationService.updateSpecialization(id, specializationRequestDto);
 		if(isUpdated) {
 			return ResponseEntity.ok("Specialization updated successfully!");
 		} else {

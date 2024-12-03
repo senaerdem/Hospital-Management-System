@@ -1,11 +1,10 @@
 package com.java.loginReg.entities;
 
-public class HospitalRequestDto {
+public class SpecializationRequestDto {
+	
 	private Long id;
 	
 	private String name;
-	
-	private String city;
 
 	public Long getId() {
 		return id;
@@ -22,13 +21,4 @@ public class HospitalRequestDto {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
-
 }

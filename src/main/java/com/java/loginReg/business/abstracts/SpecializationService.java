@@ -3,6 +3,7 @@ package com.java.loginReg.business.abstracts;
 import java.util.List;
 
 import com.java.loginReg.entities.Specialization;
+import com.java.loginReg.entities.SpecializationRequestDto;
 
 public interface SpecializationService {
 
@@ -14,5 +15,5 @@ public interface SpecializationService {
 	
 	boolean deleteSpecialization(Long id);
 	
-	boolean updateSpecialization(Long id, Specialization specialization);
+	boolean updateSpecialization(Long id, SpecializationRequestDto specializationRequestDto);
 }

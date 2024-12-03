@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.java.loginReg.business.abstracts.SpecializationService;
 import com.java.loginReg.dataAccess.SpecializationDao;
 import com.java.loginReg.entities.Specialization;
+import com.java.loginReg.entities.SpecializationRequestDto;
 
 @Service
 public class SpecializationManager implements SpecializationService{
@@ -45,13 +46,14 @@ public class SpecializationManager implements SpecializationService{
 	
 	// Uzmanlık güncellemek için method
 	@Override
-	public boolean updateSpecialization(Long id, Specialization specialization) {
-		if (specializationDao.existsById(id)) { 
-            Specialization existingSpecialization = specializationDao.findById(id).orElseThrow();
-            existingSpecialization.setName(specialization.getName());
+	public boolean updateSpecialization(Long id, SpecializationRequestDto specializationRequestDto) {
+        Specialization existingSpecialization = specializationDao.findById(id).orElseThrow();
+		if (existingSpecialization != null) { 
+            existingSpecialization.setName(specializationRequestDto.getName());
             specializationDao.save(existingSpecialization);
             return true;
         }
 		return false;
 	}
+
 }
