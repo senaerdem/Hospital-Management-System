@@ -1,6 +1,5 @@
 package com.java.loginReg.entities;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +22,7 @@ public class Hospital {
 	@Column(name= "city")
 	private String city;
 	
-	@OneToOne(mappedBy = "hospital", cascade = CascadeType.ALL)
+	@OneToOne(mappedBy = "hospital")
 	@JsonBackReference
 	private Doctor doctor;
 

@@ -88,7 +88,7 @@ public class AppointmentManager implements AppointmentService {
     
     // Doktorun uygunluğunu kontrol etmek için method
     public boolean isDoctorAvailable(Long doctorId, String day, String time) {
-        // Bu metod, doktorun daha önce randevu alıp almadığını kontrol eder
+    	// Veritabanında belirtilen doktor, gün ve saat için daha önce alınmış randevuları arar.
         List<Appointment> appointments = appointmentDao.findByDoctorIdAndDayAndTime(doctorId, day, time);
 
         // Eğer randevu varsa, doktor o saatte müsait değildir
@@ -101,8 +101,8 @@ public class AppointmentManager implements AppointmentService {
         Appointment appointment = appointmentDao.findById(appointmentId).orElse(null);
 
         if (appointment != null) {
-            appointment.setDay(day);
-            appointment.setTime(time);    
+            appointment.setDay(day); // Randevunun gün bilgisi güncellenir
+            appointment.setTime(time); // Randevunun gün bilgisi güncellenir   
             return appointmentDao.save(appointment); // Güncellenmiş randevuyu kaydediyoruz
         }
 

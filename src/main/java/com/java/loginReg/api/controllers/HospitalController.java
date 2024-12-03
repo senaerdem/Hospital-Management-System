@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.java.loginReg.business.abstracts.HospitalService;
 import com.java.loginReg.entities.Hospital;
+import com.java.loginReg.entities.HospitalRequestDto;
 import com.java.loginReg.entities.User;
 
 @RestController
@@ -45,20 +46,20 @@ public class HospitalController {
 	public ResponseEntity<String> deleteHospital(@PathVariable Long id) {
 		boolean isDeleted = hospitalService.deleteHospital(id);
 		if(isDeleted) {
-			return ResponseEntity.ok("Appointment deleted successfully!");
+			return ResponseEntity.ok("Hospital deleted successfully!");
 		} else {
-			return ResponseEntity.status(400).body("Appointment not found!");
+			return ResponseEntity.status(400).body("Hospital not found!");
 		}
 	}
 	
 	// Hastane güncellemek için endpoint
 	@PutMapping("/update/{id}")
-	public ResponseEntity<String> updateHospital(@PathVariable Long id, @RequestBody Hospital hospital) {
-		boolean isUpdated = hospitalService.updateHospital(id, hospital);
+	public ResponseEntity<String> updateHospital(@PathVariable Long id, @RequestBody HospitalRequestDto hospitalRequestDto) {
+		boolean isUpdated = hospitalService.updateHospital(id, hospitalRequestDto);
 		if(isUpdated) {
 			return ResponseEntity.ok("Hospital updated successfully!");
 		} else {
-			return ResponseEntity.status(400).body("User not found!");
+			return ResponseEntity.status(400).body("Hospital not found!");
 		}
 	}
 }

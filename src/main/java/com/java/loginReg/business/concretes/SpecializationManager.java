@@ -27,11 +27,13 @@ public class SpecializationManager implements SpecializationService{
 		return specializationDao.findAll();
 	}
 	
+	// Doktoru uzmanlığına göre getirmek için method
 	public Specialization findByName(String name) {
         return specializationDao.findByName(name)
                 .orElseThrow(() -> new IllegalArgumentException("Specialization not found with name: " + name));
     }
 	
+	// Uzmanlık silmek için method
 	@Override
 	public boolean deleteSpecialization(Long id) {
 		if (specializationDao.existsById(id)) { // Veritabanında uzmanlık bulunduysa
@@ -41,9 +43,10 @@ public class SpecializationManager implements SpecializationService{
 		return false;
 	}
 	
+	// Uzmanlık güncellemek için method
 	@Override
 	public boolean updateSpecialization(Long id, Specialization specialization) {
-		if (specializationDao.existsById(id)) { // 
+		if (specializationDao.existsById(id)) { 
             Specialization existingSpecialization = specializationDao.findById(id).orElseThrow();
             existingSpecialization.setName(specialization.getName());
             specializationDao.save(existingSpecialization);

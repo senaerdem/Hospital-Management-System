@@ -17,10 +17,10 @@ public class Appointment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Doctor doctor; // Bir doktorun birden fazla randevusu olabilir
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	private Patient patient; // Bir hastanın birden fazla randevusu olabilir
 	
 	@Enumerated(EnumType.STRING)

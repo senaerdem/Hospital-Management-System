@@ -3,6 +3,7 @@ package com.java.loginReg.business.abstracts;
 import java.util.List;
 
 import com.java.loginReg.entities.Hospital;
+import com.java.loginReg.entities.HospitalRequestDto;
 
 public interface HospitalService {
 
@@ -12,5 +13,5 @@ public interface HospitalService {
 	
 	boolean deleteHospital(Long id);
 	
-	boolean updateHospital(Long id, Hospital hospital);
+	boolean updateHospital(Long id, HospitalRequestDto hospitalRequestDto);
 }

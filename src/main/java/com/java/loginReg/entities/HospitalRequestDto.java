@@ -1,7 +1,6 @@
 package com.java.loginReg.entities;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -9,27 +8,12 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-@Entity
-public class Specialization {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class HospitalRequestDto {
 	private Long id;
 	
-	@Column(name = "name")
 	private String name;
 	
-	@OneToOne(mappedBy = "specialization")
-	@JsonBackReference
-	private Doctor doctor;
-	
-	public Specialization(String name) {
-		this.name = name;
-	}
-
-	public Specialization() {
-		super();
-	}
+	private String city;
 
 	public Long getId() {
 		return id;
@@ -47,11 +31,12 @@ public class Specialization {
 		this.name = name;
 	}
 
-	public Doctor getDoctor() {
-		return doctor;
+	public String getCity() {
+		return city;
 	}
 
-	public void setDoctor(Doctor doctor) {
-		this.doctor = doctor;
+	public void setCity(String city) {
+		this.city = city;
 	}
+
 }

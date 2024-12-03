@@ -62,15 +62,16 @@ public class UserManager implements UserService {
 	        Patient patient = new Patient();
 	        patient.setUser(user);  // Patient ile User'ı ilişkilendir
 	        patientDao.save(patient); // Patient tablosuna kaydet
+	       
 	    } else if (userDto.getRole() == Role.DOCTOR) {
 	        Doctor doctor = new Doctor();
 	        doctor.setUser(user);
 	        
-	        if(userDto.getSpecializationId() != null) {
+	        if(userDto.getSpecializationId() != null) { // Böyle bir uzmanlık varsa
 	        	Specialization specialization = specializationDao.findById(userDto.getSpecializationId()).orElseThrow(() -> new IllegalArgumentException("Specialization not found"));
-	        	doctor.setSpecialization(specialization);
+	        	doctor.setSpecialization(specialization); // Bu uzmanlık bilgisi doctor nesnesine set edilir
 	        }
-	        doctorDao.save(doctor);
+	        doctorDao.save(doctor); // Uzmanlık bilgisi ile birlikte doctor nesnesi veritabanına kaydedilir.
 	    }
 
 	    return user;
